@@ -1,0 +1,6 @@
+agent_id,name,region,sales,bonus_percentage
+1001,Ana,Norte,150000,0.10
+1002,Luis,Sur,120000,0.08
+1003,Carlos,Centro,90000,0.07
+1004,Sofia,Norte,200000,0.12
+1005,Elena,Sur,50000,0.05
