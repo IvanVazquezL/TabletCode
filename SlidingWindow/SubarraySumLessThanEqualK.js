@@ -15,10 +15,10 @@ function findLength(nums, k) {
             left++;
         }
 
-        answer = Math.max(answer, curr);
+        answer = Math.max(answer, right - left + 1);
     }
 
     return answer;
 }
 
-findLength([3, 1, 2, 7, 4, 2, 1, 1, 5], 8);
+console.log(findLength([3, 1, 2, 7, 4, 2, 1, 1, 5], 8));
