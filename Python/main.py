@@ -8,9 +8,9 @@ def main():
     agent_repository = AgentRepository()
     agents = agent_repository.get_agents('Python/agents.csv')
     payroll_system = PayrollSystem([
-        PerformancePolicy,
-        RegionalPolicy
-        PenaltyPolicy
+        PerformancePolicy(),
+        RegionalPolicy(),
+        PenaltyPolicy()
     ])
     for agent in agents:
         final_bonus = payroll_system.calculate_bonus(agent)

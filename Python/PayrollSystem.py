@@ -1,3 +1,5 @@
+from Agent import Agent
+
 class PayrollSystem:
     def __init__(self, policies: list):
         self.policies = policies
