@@ -9,17 +9,14 @@ queries = [[0, 3], [2, 5], [2, 4]], and limit = 13, the answer
 is [true, false, true]. For each query, the subarray sums are [12, 14, 12].
 """
 def queries_sum(nums: list[int], queries: list[list[int]], limit: int) -> list[bool]:
-    prefix_sum, answers = [nums[0]], []
+    prefix, answers = [0], []
 
-    for i in range(1, len(nums)):
-        prefix_sum.append(nums[i] + prefix_sum[i - 1])
+    for num in nums:
+        prefix.append(prefix[-1] + num)
 
-    for query in queries:
-        left, right = query
-
-        answers.append(
-            prefix_sum[right] - prefix_sum[left] + nums[left] < limit
-        )
+    for left, right in queries:
+        range_sum = prefix[right + 1] - prefix[left]
+        answers.append(range_sum < limit)
     
     return answers
 
