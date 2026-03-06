@@ -6,16 +6,19 @@ function reverseWord(s) {
     const answer = [];
 
     for (const word of words) {
+        const newWord = word.split('');
         let left = 0;
-        let right = word.length - 1;
+        let right = newWord.length - 1;
 
         while (left < right) {
-            const temp = word[left];
-            word[left] = word[right];
-            word[right] = temp; 
+            const temp = newWord[left];
+            newWord[left] = newWord[right];
+            newWord[right] = temp; 
+            left++;
+            right--;
         }
 
-        answer.push(word.join(''));
+        answer.push(newWord.join(''));
     }
 
     return answer.join(' ');
