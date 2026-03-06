@@ -12,15 +12,15 @@ def queries_sum(nums: list[int], queries: list[list[int]], limit: int) -> list[b
     prefix_sum, answers = [nums[0]], []
 
     for i in range(1, len(nums)):
-        prefix_sum[i] = nums[i] + prefix_sum[i - 1]
+        prefix_sum.append(nums[i] + prefix_sum[i - 1])
 
     for query in queries:
         left, right = query
 
         answers.append(
-            prefix_sum[right] - prefix_sum[left] + nums[left]
+            prefix_sum[right] - prefix_sum[left] + nums[left] < limit
         )
     
     return answers
 
-queries_sum([1, 6, 3, 2, 7, 2], [[0, 3], [2, 5], [2, 4]], 13)
+print(queries_sum([1, 6, 3, 2, 7, 2], [[0, 3], [2, 5], [2, 4]], 13))
