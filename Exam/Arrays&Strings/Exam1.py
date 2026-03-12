@@ -1,46 +1,4 @@
 '''
-Problema 3
-
-Dado un string s y un entero k, encuentra el número máximo de vocales (a, e, i, o, u)
-que pueden aparecer en cualquier substring contiguo de longitud k.
-
-Ejemplo:
-
-s = "abciiidef"
-k = 3
-# Output: 3
-
-
----
-
-Problema 4
-
-Dado un array nums, encuentra el índice i tal que la suma de los elementos a la 
-izquierda de i sea igual a la suma de los elementos a la derecha. Si no existe, 
-devuelve -1.
-
-Ejemplo:
-
-nums = [1,7,3,6,5,6]
-# Output: 3
-
-
----
-
-Problema 5
-
-Dado un string word y un carácter ch, invierte la subcadena desde el inicio hasta la 
-primera aparición de ch. Devuelve el string resultante. Si ch no aparece, devuelve 
-word sin cambios.
-
-Ejemplo:
-
-word = "abcdefd"
-ch = "d"
-# Output: "dcbaefd"
-'''
-
-'''
 Problema 1
 
 Dado un array de números positivos nums y un entero target, encuentra el mínimo 
@@ -99,3 +57,94 @@ def problem2(s: str, t: str, max_cost: int) -> int:
 
 
 print(problem2("abcd", "bcdf", 3))
+
+'''
+Problema 3
+
+Dado un string s y un entero k, encuentra el número máximo de vocales (a, e, i, o, u)
+que pueden aparecer en cualquier substring contiguo de longitud k.
+
+Ejemplo:
+
+s = "abciiidef"
+k = 3
+# Output: 3
+'''
+def problem3(s: str, k: int) -> int:
+    vowels = {"a", "e", "i", "o", "u"}
+    curr, answer = 0, 0
+
+    for i in range(k):
+        if s[i] in vowels:
+            curr += 1
+
+    answer = curr
+
+    for i in range(k, len(s)):
+        if s[i] in vowels:
+            curr += 1
+        if s[i - k] in vowels:
+            curr -= 1
+
+        answer = max(answer, curr)
+
+    return answer
+
+print(problem3("abciiidef", 3))
+
+'''
+Problema 4
+
+Dado un array nums, encuentra el índice i tal que la suma de los elementos a la 
+izquierda de i sea igual a la suma de los elementos a la derecha. Si no existe, 
+devuelve -1.
+
+Ejemplo:
+
+nums = [1,7,3,6,5,6]
+# Output: 3
+'''
+def problem4(nums: list[int]) -> int:
+    total, curr = sum(nums), 0
+
+    for i in range(len(nums)):
+        curr += nums[i]
+        left = curr - nums[i]
+        right = total - left - nums[i]
+
+        if left == right:
+            return i
+        
+    return -1
+
+    
+print(problem4([1,7,3,6,5,6]))
+
+'''
+Problema 5
+
+Dado un string word y un carácter ch, invierte la subcadena desde el inicio hasta la 
+primera aparición de ch. Devuelve el string resultante. Si ch no aparece, devuelve 
+word sin cambios.
+
+Ejemplo:
+
+word = "abcdefd"
+ch = "d"
+# Output: "dcbaefd"
+'''
+
+def problem5(word: str, ch: str) -> str:
+    chars = list(word)
+    right = word.find(ch)
+    left = 0
+
+    while left < right:
+        chars[left], chars[right] = chars[right], chars[left]
+        right -= 1
+        left += 1
+    
+    return "".join(chars)
+
+
+print(problem5("abcdefd", "d"))
